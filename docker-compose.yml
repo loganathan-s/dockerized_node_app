@@ -10,8 +10,11 @@ services:
     secrets:
       - port
     restart: always
+    volumes:
+      - node_modules:/user/src/app/node_modules
     environment:
       port: /run/secrets/app_port
+
   mongo:
     image: mongo
     restart: always
@@ -35,3 +38,4 @@ secrets:
     file: ./port.txt
 volumes:
   mongo-data:
+  node_modules:

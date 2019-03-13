@@ -3,13 +3,17 @@ FROM node:latest
 
 WORKDIR /usr/src/app
 
-COPY package.json ./
+RUN mkdir -p /usr/src/app/node_modules
 
-RUN npm install
+COPY package.json ./
 
 COPY . .
 
+RUN npm install
+RUN npm install -g nodemon
+
 # replace this with your application's default port
 EXPOSE 3001
+
 
 CMD [ "npm", "start" ]
