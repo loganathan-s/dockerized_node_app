@@ -1,19 +1,17 @@
 # specify the node base image with your desired version node:<version>
 FROM node:latest
 
-WORKDIR /usr/src/app
+RUN npm i nodemon -g
 
-RUN mkdir -p /usr/src/app/node_modules
+WORKDIR /usr/src/app
 
 COPY package.json ./
 
 COPY . .
 
-RUN npm install
-RUN npm install -g nodemon
+RUN npm install --silent
 
 # replace this with your application's default port
 EXPOSE 3001
 
-
-CMD [ "npm", "start" ]
+CMD [ "nodemon", "app.js" ]
