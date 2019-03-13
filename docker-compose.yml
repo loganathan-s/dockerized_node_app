@@ -10,8 +10,6 @@ services:
     secrets:
       - port
     restart: always
-    volumes:
-      - node_modules:/user/src/app/node_modules
     environment:
       port: /run/secrets/app_port
 
