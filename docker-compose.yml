@@ -12,6 +12,12 @@ services:
     restart: always
     environment:
       port: /run/secrets/app_port
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    working_dir: /usr/src/app
+    command:  /bin/bash -c 'nodemon app.js'
+
 
   mongo:
     image: mongo
@@ -37,3 +43,5 @@ secrets:
 volumes:
   mongo-data:
   node_modules:
+
+
