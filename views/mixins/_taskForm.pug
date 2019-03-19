@@ -1,0 +1,6 @@
+mixin taskForm(task = {})
+    form(action="/add" method="POST")
+        label Name
+        input(type="text" name="name")
+        input(type="submit" value="Save")
+

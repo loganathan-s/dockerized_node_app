@@ -1,5 +1,21 @@
-version: "3.2"
+version: "3.7"
 services:
+
+  mongo:
+    container_name: mongodb
+    image: bitnami/mongodb:latest
+    restart: always
+    volumes:
+      - new-mongo-data:/data/db
+    ports:
+      - "27017:27017"
+    secrets:
+      - db_user
+      - db_password
+    environment:
+      MONGODB_USERNAME: 'root'
+      MONGODB_PASSWORD: 'root'
+      MONGODB_DATABASE: 'crud'
   nodemonapp:
     container_name: nodemonapp
     build: .
@@ -16,22 +32,7 @@ services:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
     working_dir: /usr/src/app
-    command:  /bin/bash -c 'nodemon app.js'
-
-
-  mongo:
-    image: mongo
-    restart: always
-    volumes:
-      - mongo-data:/data/db
-    ports:
-      - "27017:27017"
-    secrets:
-      - db_user
-      - db_password
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: /run/secrets/db_user
-      MONGO_INITDB_ROOT_PASSWORD: /run/secrets/db_password
+    command:  /bin/bash -c 'npm start'
 
 secrets:
   db_user:
@@ -41,7 +42,7 @@ secrets:
   port:
     file: ./port.txt
 volumes:
-  mongo-data:
+  new-mongo-data:
   node_modules:
 
 
