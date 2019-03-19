@@ -3,14 +3,13 @@ const mongoose = require('mongoose');
 //mongodb://dang:p055w0rd@ds113785.mlab.com:13785/
 mongoose.connect('mongodb://root:root@mongodb:27017/crud');
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
-mongoose.connection.on('error', (err) => {
+mongoose.connection.on('error', err => {
   console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
 });
-
+//
 
 // Import all our models
 require('./models/Task')
-
 const app = require('./app');
 // Constants
 const PORT = 3001;

@@ -6,7 +6,7 @@ services:
     image: bitnami/mongodb:latest
     restart: always
     volumes:
-      - new-mongo-data:/data/db
+      - mongodb_master_data:/bitnami
     ports:
       - "27017:27017"
     secrets:
@@ -21,7 +21,7 @@ services:
     build: .
     ports:
       - "3001:3001"
-    links:
+    depends_on:
       - mongo
     secrets:
       - port
@@ -42,7 +42,7 @@ secrets:
   port:
     file: ./port.txt
 volumes:
-  new-mongo-data:
   node_modules:
-
+  mongodb_master_data:
+    driver: local
 
